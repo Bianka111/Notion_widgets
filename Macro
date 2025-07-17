@@ -1,0 +1,227 @@
+var validation_host = 'https://fitnessvolt.com/';
+var cal_code = 'bodyrecomposition';
+var path = 'cal-assets/'+cal_code+'-files/'+cal_code+'-public-assets/'+cal_code+'-files';
+var scripts = [validation_host+"/cal-assets/"+cal_code+"-files/"+cal_code+"-public-assets/"+cal_code+"-files/jquery.min.js", validation_host+"/cal-assets/"+cal_code+"-files/"+cal_code+"-public-assets/"+cal_code+"-files/"+cal_code+".js" ];
+for (index = 0; index < scripts.length; ++index) {
+    var script = document.createElement("script");
+    script.src = scripts[index];
+    script.type = "text/javascript";
+    var done = false;
+    script.onload = script.onreadystatechange = function () {
+        if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+            done = true;
+        }
+    };
+    document.getElementsByTagName("head")[0].appendChild(script);
+}
+
+var html = '<link rel="stylesheet" href="'+validation_host+'/'+path+'/'+cal_code+'-cal.css">';
+
+var html_2 = `<div class="bodyrecomposition__calculator">
+<div class="bodyrecomposition__input">
+    <div class="bodyrecomposition__title_row">
+        <div class="bodyrecomposition__calculator_title">Body Recomposition Calculator</div>
+        <div class="switch_field switch_metric"> <input type="radio" id="units_imp" name="unitstabs"
+                value="imperial" checked=""> <label for="units_imp">Imperial</label> <input type="radio"
+                id="units_met" name="unitstabs" value="metric"> <label for="units_met">Metric</label> </div>
+    </div>
+    <div class="bodyrecomposition__input_wrapper">
+        <div class="error_message">Please fill out the form correctly</div>
+        <div class="switch_field switch_gender" style="padding: 0px 6px; padding-left: 10px;"> <input type="radio" id="male" name="gender" value="male"
+                checked=""> <label for="male">Male</label> <input type="radio" id="female" name="gender"
+                value="female"> <label for="female">Female</label></div>
+        <hr class="bodyrecomposition__divider">
+        <div class="bodyrecomposition__row">
+            <div class="bodyrecomposition__col">
+                <div class="bodyrecomposition__input_name">age</div>
+                <input type="text" name="age" id="age" maxlength="3" value="" placeholder="">
+            </div>
+            <div class="bodyrecomposition__col">
+                <div class="bodyrecomposition__input_name">weight</div>
+                <span class="imperial"> <input type="text" name="weight" id="weightlbs" placeholder="lbs"
+                        maxlength="3" value=""></span> <span class="metric"> <input type="text" name="weight"
+                        id="weightkg" placeholder="kg" maxlength="3" value=""></span>
+            </div>
+            <div class="bodyrecomposition__col">
+                <div class="bodyrecomposition__input_name">height</div>
+                <div class="imperial">
+                    <select name="height" id="height">
+                        <option value="55">4ft 7in</option>
+                        <option value="56">4ft 8in</option>
+                        <option value="57">4ft 9in</option>
+                        <option value="58">4ft 10in</option>
+                        <option value="59">4ft 11in</option>
+                        <option value="60">5ft 0in</option>
+                        <option value="61">5ft 1in</option>
+                        <option value="62">5ft 2in</option>
+                        <option value="63">5ft 3in</option>
+                        <option value="64">5ft 4in</option>
+                        <option value="65">5ft 5in</option>
+                        <option value="66">5ft 6in</option>
+                        <option value="67">5ft 7in</option>
+                        <option value="68" selected>5ft 8in</option>
+                        <option value="69">5ft 9in</option>
+                        <option value="70">5ft 10in</option>
+                        <option value="71">5ft 11in</option>
+                        <option value="72">6ft 0in</option>
+                        <option value="73">6ft 1in</option>
+                        <option value="74">6ft 2in</option>
+                        <option value="75">6ft 3in</option>
+                        <option value="76">6ft 4in</option>
+                        <option value="77">6ft 5in</option>
+                        <option value="78">6ft 6in</option>
+                        <option value="79">6ft 7in</option>
+                        <option value="80">6ft 8in</option>
+                        <option value="81">6ft 9in</option>
+                        <option value="82">6ft 10in</option>
+                        <option value="83">6ft 11in</option>
+                        <option value="84">7ft 0in</option>
+                    </select>
+                </div>
+                <div class="metric"> <input type="text" name="height" id="height-metric" placeholder="cm"
+                        maxlength="3"></div>
+            </div>
+            <div style="clear:left;"></div>
+        </div>
+        <hr class="bodyrecomposition__divider">
+        <div class="bodyrecomposition__input_row">
+            <div class="bodyrecomposition__input_name">Formula</div>
+            <div class="switch_field switch_formula"> <input type="radio" id="formulaopt_body" name="formulaopt"
+                    value="TBWF" checked=""> <label for="formulaopt_body">Normal</label> <input
+                    type="radio" id="formulaopt_mass" name="formulaopt" value="LMF"> <label
+                    for="formulaopt_mass">Lean Mass</label> </div>
+            <div class="lean_mass_body_fat" style="display: none;">
+                <div class="bodyrecomposition__input_name"> Body Fat </div>
+                <input type="text" name="bodyfat" id="bodyfat" maxlength="2" placeholder="%">
+            </div>
+        </div>
+        <hr class="bodyrecomposition__divider">
+        <div class="bodyrecomposition__row">
+                <div class="bodyrecomposition__input_name" style="margin-left: 10px; margin-bottom: 0px;text-transform:none"><strong>Exercise:</strong> Complete a minimum of 3 workout training sessions each week, each 30 Minutes per session.</div>
+            <div style="clear:left;"></div>
+        </div>
+        <hr class="bodyrecomposition__divider">
+        <div class="bodyrecomposition__row">
+            <div class="bodyrecomposition__col">
+                <div class="bodyrecomposition__input_name">Additional Weekly Calories</div>
+                <input type="text" name="additional_calorie" id="additional_calorie" value="" placeholder="kcal">
+            </div>
+            <div style="clear:left;"></div>
+        </div>
+
+        <hr class="bodyrecomposition__divider">
+        <div class="bodyrecomposition__input_row" style="margin-bottom: 0px !important;">
+            <div class="bodyrecomposition__input_name">Recomposition Goal</div>
+            <div class="switch_field switch_activity"> 
+                <input type="radio" id="activity_s" name="activity" value="More Fat Loss" data-short="More Fat Loss" data-cl="More Fat Loss" checked=""> 
+                <label for="activity_s">More Fat Loss</label> 
+                <input type="radio" id="activity_l" name="activity" value="Even" data-short="Even" data-cl="Even"> 
+                <label for="activity_l">Even</label> 
+                <input type="radio" id="activity_m" name="activity" value="More Muscle Gain" data-short="More Muscle Gain" data-cl="More Muscle Gain">
+                <label style="margin-bottom: 0px !important;" for="activity_m">More Muscle Gain</label> 
+            </div>
+        </div>
+        <hr class="bodyrecomposition__divider">
+        <div class="bodyrecomposition__input_row">
+            <div class="bodyrecomposition__input_name">Adjust Meals Per Day</div>
+            <div class="switch_field switch_factor"> 
+                <input type="radio" id="factor_n" name="factor" value="All" checked=""> 
+                <label for="factor_n">All</label> 
+                <input type="radio" id="factor_l" name="factor" value="2"> 
+                <label for="factor_l">2</label> 
+                <input type="radio" id="factor_m" name="factor" value="3"> 
+                <label for="factor_m">3</label> 
+                <input type="radio" id="factor_d" name="factor" value="4"> 
+                <label for="factor_d">4</label> 
+                <input type="radio" id="factor_i" name="factor" value="5"> 
+                <label for="factor_i">5</label> 
+            </div>
+        </div>
+        <hr class="bodyrecomposition__divider">
+        <div class="bodyrecomposition__input_row">
+            <div class="bodyrecomposition__input_name">Adjust Protein Amount</div>
+            <div class="switch_field switch_Protein"> 
+                <input type="radio" id="Plant-based" name="Protein" value="Plant-based" checked=""> 
+                <label for="Plant-based">Plant-based</label> 
+                <input type="radio" id="High" name="Protein" value="High"> 
+                <label for="High">High</label> 
+                <input type="radio" id="Maximum" name="Protein" value="Maximum"> 
+                <label for="Maximum">Maximum</label> 
+            </div>
+        </div>
+        <div class="bodyrecomposition__button_row"> <button class="bodyrecomposition__button" type="button"
+                onclick="bodyrecomposition__calculate();return false;">Calculate</button></div>
+    </div>
+</div>
+<div class="bodyrecomposition__result">
+    <h2>Result:</h2>
+    <div class="bodyrecomposition__result_block macros_block">
+        <div class="bodyrecomposition__calculator_result_title">Training Days</div>
+        <div class="daily_calories_result_training">calculated</div><span class="daily_calories_result_text"> Calories Per Meal</span>
+    </div>
+    <div class="bodyrecomposition__result_block">
+        <div class="maintenance_table">
+            <div class="bodyrecomposition__result_bodyrecomposition_block">
+                <div class="bodyrecomposition_title bodyrecomposition_carbs">Carbs</div>
+                <hr>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_carbs"></div><br>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_carbs_percent"></div>
+
+            </div>
+            <div class="bodyrecomposition__result_bodyrecomposition_block">
+                <div class="bodyrecomposition_title bodyrecomposition_protein">Protein</div>
+                <hr>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_protein"></div><br>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_protein_percent"></div>
+
+            </div>
+            <div class="bodyrecomposition__result_bodyrecomposition_block">
+                <div class="bodyrecomposition_title bodyrecomposition_fat">Fat</div>
+                <hr>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_fat"></div><br>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_fat_percent"></div>
+
+            </div>
+            <div style="clear:left;"></div>
+        </div>
+    </div>
+    <hr class="bodyrecomposition__divider">
+    <div class="bodyrecomposition__result_block macros_block">
+        <div class="bodyrecomposition__calculator_result_title">Rest Days</div>
+        <div class="daily_calories_result_rest">calculated</div><span class="daily_calories_result_text"> Calories Per Meal</span>
+    </div>
+    <div class="bodyrecomposition__result_block">
+        <div class="maintenance_table">
+            <div class="bodyrecomposition__result_bodyrecomposition_block">
+                <div class="bodyrecomposition_title bodyrecomposition_carbs">Carbs</div>
+                <hr>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_restday_carbs"></div><br>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_restday_carbs_percent"></div>
+
+            </div>
+            <div class="bodyrecomposition__result_bodyrecomposition_block">
+                <div class="bodyrecomposition_title bodyrecomposition_protein">Protein</div>
+                <hr>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_restday_protein"></div><br>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_restday_protein_percent"></div>
+
+            </div>
+            <div class="bodyrecomposition__result_bodyrecomposition_block">
+                <div class="bodyrecomposition_title bodyrecomposition_fat">Fat</div>
+                <hr>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_restday_fat"></div><br>
+                <div class="bodyrecomposition_gramms" id="bodyrecomposition_restday_fat_percent"></div>
+            </div>
+            <div style="clear:left;"></div>
+        </div>
+    </div>
+</div>
+    <div id="fitnessvolt">
+        <div>Powered by : <a href="https://fitnessvolt.com" target="_blank"><b> FitnessVolt.com</b></a></div>
+    </div>
+</div>`;
+
+var html_3 = '';
+var cal_ids = "cal_"+cal_code+"";
+
+document.getElementById(cal_ids).innerHTML = html + html_2 + html_3 ;
